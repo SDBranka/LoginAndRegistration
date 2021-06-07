@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 1px solid red;
+}
+
+#wrapper {
+    width: 900px;
+    margin: 100px auto;
+    border: 3px solid maroon;
+    padding: 10px;
+}
+
+a {
+    margin-left: 839px;
+}
+
+h2 {
+    margin: 15px 0px;
+}
+
+p {
+    color: green;
+}
