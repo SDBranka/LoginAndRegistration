@@ -1,6 +1,6 @@
 from django.db import models
-from django.db.models.fields import EmailField
 import re
+import datetime
 
 # Create your models here.
 
@@ -20,6 +20,10 @@ class UserManager(models.Manager):
         email_in_db = self.filter(email = postData['email'])        #ensure no duplicate email exists
         if email_in_db:
             errors["email"] = "This email already exists in the database"
+        if len(postData['birthdate']) < 1:
+            errors['birthdate'] = "Please enter a valid birthdate"
+        if postData["birthdate"] >= str(datetime.date.today()):
+            errors["birthdate"] = "Please enter a date prior to today's date"
         if len(postData['password']) < 8:
             errors["password"] = "Please enter a valid password"
         if not postData['password'] == postData['confirm_pw']:
@@ -47,6 +51,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=60)
     email = models.CharField(max_length=60)
     password = models.CharField(max_length=60)
+    birthdate = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
